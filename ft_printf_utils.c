@@ -6,11 +6,39 @@
 /*   By: tmontani <tmontani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 15:59:48 by tmontani          #+#    #+#             */
-/*   Updated: 2023/12/04 18:14:46 by tmontani         ###   ########.fr       */
+/*   Updated: 2023/12/04 19:52:29 by tmontani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+char	*fill_hex_str(char *str, unsigned long nb, char X_or_x)
+{
+	char	*hex_upper;
+	char	*hex_lower;
+	int		i;
+
+	i = 0;
+	hex_lower = "0123456789abcdef";
+	hex_upper = "0123456789ABCDEF";
+	while (nb > 0)
+	{
+		if (X_or_x == 'x')
+		{
+			str[i] = hex_lower[nb % 16];
+		nb /= 16;
+		i++;
+		}
+		else if (X_or_x == 'X')
+		{
+			str[i] = hex_upper[nb % 16];
+		nb /= 16;
+		i++;
+		}
+		str[i] = '\0';
+	}
+	return (str);
+}
 
 int	ft_lenght_hex(unsigned long nb)
 {
@@ -26,49 +54,28 @@ int	ft_lenght_hex(unsigned long nb)
 	return (len);
 }
 
-int ft_itoa_hex(unsigned long nb, char X_or_x)
+int	ft_itoa_hex(unsigned long nb, char X_or_x)
 {
-    char    *str;
-    char    *hexa_upper;
-    char    *hexa_lower;
-    int     i;
-    int     j;
+	char	*str;
+	char	*hexa_upper;
+	char	*hexa_lower;
+	int		i;
+	int		j;
 
-    hexa_lower = "0123456789abcdef";
-    hexa_upper = "0123456789ABCDEF";
-    i = 0;
-    j = 0;
-    if (nb == 0)
-        return (write(1, "0", 1));
-    str = (char *)malloc(sizeof(char) * 17);
-    if (!str)
-        return (0);
-    while (nb > 0)
-    {
-        if (X_or_x == 'X')
-        {
-            str[i] = hexa_upper[nb % 16];
-            nb = nb / 16;
-            i++;
-        }
-        else if (X_or_x == 'x')
-        {
-            str[i] = hexa_lower[nb % 16];
-            nb = nb / 16;
-            i++;
-        }
-    }
-    str[i] = '\0';
-    i--;
-    while (i >= 0)
-    {
-        j += write(1, &str[i], 1);
-        i--;
-    }
-    free(str);
-    return (j);
+	hexa_lower = "0123456789abcdef";
+	hexa_upper = "0123456789ABCDEF";
+	i = 0;
+	j = 0;
+	if (nb == 0)
+		return (write(1, "0", 1));
+	str = (char *)malloc(sizeof(char) * 17);
+	if (!str)
+		return (0);
+	str = fill_hex_str(str, nb, X_or_x);
+	j += ft_putstr_nreverse(str);
+	free(str);
+	return (j);
 }
-
 
 int	ft_handle_hex(unsigned int nb, char X_or_x)
 {
@@ -86,7 +93,7 @@ int	ft_handle_ptr(void *ptr)
 	int	j;
 
 	j = 0;
-	if (ptr == 0)
+	if (ptr == NULL)
 	{
 		ft_putstr("0x0");
 		return (3);

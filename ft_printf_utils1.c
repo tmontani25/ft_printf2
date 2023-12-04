@@ -6,39 +6,11 @@
 /*   By: tmontani <tmontani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 17:07:01 by tmontani          #+#    #+#             */
-/*   Updated: 2023/12/04 17:44:27 by tmontani         ###   ########.fr       */
+/*   Updated: 2023/12/04 19:48:20 by tmontani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-char *ft_putnbr_hex(unsigned long nb, char X_or_x, char *str)
-{
-	char	*hex_upper;
-	char	*hex_lower;
-	int		i;
-
-	i = 0;
-	hex_upper = "0123456789ABCDEF";
-	hex_lower = "012456789abcdef";
-	while (nb > 0)
-	{
-		if (X_or_x == 'X')
-		{
-			str[i] = hex_upper[nb % 16];
-			nb = nb / 16;
-			i++;
-		}
-		else if (X_or_x == 'x')
-		{
-			str[i] = hex_lower[nb % 16];
-			nb = nb / 16;
-			i++;
-		}
-	}
-	str[i] = '\0';
-	return (str);
-}
 
 int	ft_strlen(char *str)
 {

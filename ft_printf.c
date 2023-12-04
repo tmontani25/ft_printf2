@@ -6,7 +6,7 @@
 /*   By: tmontani <tmontani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 13:44:47 by tmontani          #+#    #+#             */
-/*   Updated: 2023/12/04 17:14:04 by tmontani         ###   ########.fr       */
+/*   Updated: 2023/12/04 19:48:15 by tmontani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ int	ft_printf(const char *str, ...)
 	int nb_char_printed;
 
 	c = 1234;
- nb_char_printed = ft_printf("%X%Xx%X", 1, 2, -3);
+ nb_char_printed = ft_printf("%p", "");
 	printf("\n\n");
-	printf("nombre de char imprime: %p", NULL);
+	printf("nombre de char imprime: %p", "");
 	return (0);
 }*/
