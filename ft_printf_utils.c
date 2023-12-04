@@ -6,11 +6,26 @@
 /*   By: tmontani <tmontani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 15:59:48 by tmontani          #+#    #+#             */
-/*   Updated: 2023/12/04 19:52:29 by tmontani         ###   ########.fr       */
+/*   Updated: 2023/12/04 20:11:06 by tmontani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+int	ft_putstr_nreverse(char *str)
+{
+	int	i;
+	int	j;
+
+	j = 0;
+	i = ft_strlen(str) - 1;
+	while (i >= 0)
+	{
+		j += write(1, &str[i], 1);
+		i--;
+	}
+	return (j);
+}
 
 char	*fill_hex_str(char *str, unsigned long nb, char X_or_x)
 {
@@ -40,20 +55,6 @@ char	*fill_hex_str(char *str, unsigned long nb, char X_or_x)
 	return (str);
 }
 
-int	ft_lenght_hex(unsigned long nb)
-{
-	int	len;
-
-	len = 0;
-	while (nb > 0)
-	{
-		nb = nb / 10;
-		len++;
-	}
-	len--;
-	return (len);
-}
-
 int	ft_itoa_hex(unsigned long nb, char X_or_x)
 {
 	char	*str;
@@ -77,6 +78,20 @@ int	ft_itoa_hex(unsigned long nb, char X_or_x)
 	return (j);
 }
 
+int	ft_lenght_hex(unsigned long nb)
+{
+	int	len;
+
+	len = 0;
+	while (nb > 0)
+	{
+		nb = nb / 10;
+		len++;
+	}
+	len--;
+	return (len);
+}
+
 int	ft_handle_hex(unsigned int nb, char X_or_x)
 {
 	int	len;
@@ -85,21 +100,6 @@ int	ft_handle_hex(unsigned int nb, char X_or_x)
 	j = 0;
 	len = ft_lenght_hex(nb);
 	j += ft_itoa_hex(nb, X_or_x);
-	return (j);
-}
-
-int	ft_handle_ptr(void *ptr)
-{
-	int	j;
-
-	j = 0;
-	if (ptr == NULL)
-	{
-		ft_putstr("0x0");
-		return (3);
-	}
-	j += ft_putstr("0x");
-	j += ft_itoa_hex((unsigned long)ptr, 'x');
 	return (j);
 }
 /*int main(void)

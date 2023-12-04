@@ -6,7 +6,7 @@
 #    By: tmontani <tmontani@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/27 14:14:14 by tmontani          #+#    #+#              #
-#    Updated: 2023/12/04 17:21:56 by tmontani         ###   ########.fr        #
+#    Updated: 2023/12/04 20:10:03 by tmontani         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ AR = ar rcs
 SRCS =	ft_printf_utils.c \
 		ft_printf.c \
 		ft_printf_utils1.c \
+		ft_printf_utils2.c \
 		
 OBJS = $(SRCS:.c=.o)
 
